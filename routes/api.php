@@ -15,10 +15,15 @@ Route::get('/home', function () {
 
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::post('/login', [AuthController::class, 'login']);
-
-Route::middleware('auth:sanctum')->put('/users/{id}', [AuthController::class, 'update']);
-
 Route::middleware('auth:sanctum')->delete('/users/{id}', [AuthController::class, 'destroy']);
 
-Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+Route::middleware(['throttle:global-limit'])->group(function () {
+    
+    Route::post('/login', [AuthController::class, 'login']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::put('/users/{id}', [AuthController::class, 'update']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+    });
+
+});

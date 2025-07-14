@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\RateLimiter;
 
 class AuthController extends Controller
 {
@@ -37,6 +38,15 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+           $key = 'login:' . $request->ip() . ':' . $request->email;
+           if (!RateLimiter::attempt($key, 5, function () {
+           return true;
+           })) {
+    return response()->json([
+        'message' => 'Too many login attempts. Please try again later.'
+    ], 429);
+}
+
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -56,6 +66,15 @@ class AuthController extends Controller
 
     public function update(Request $request, $id)
     {
+
+    $key = 'update-user:' . $request->ip() . ':' . $id;
+if (!RateLimiter::attempt($key, 5, function () {
+    return true;
+})) {
+    return response()->json([
+        'message' => 'Too many update attempts. Please try again later.'
+    ], 429);
+}
         $user = User::find($id);
 
         if (!$user) {
@@ -96,7 +115,7 @@ public function logout(Request $request)
         if (!$user) {
             return response()->json([
                 'message' => 'Unauthenticated. Token missing or invalid.'
-            ], 401); // Or 400 if you prefer
+            ], 401);
         }
 
         $user->currentAccessToken()->delete();
