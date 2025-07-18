@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    background: #eef1f5;
+}
+.navbar {
+    background: #2a3f54;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+.navbar h1 {
+    flex: 1;
+    font-size: 1.5em;
+}
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+.navbar ul li a,
+.navbar ul li button {
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+}
+.navbar ul li button:hover,
+.navbar ul li a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+main {
+    padding: 20px;
+}
+.panel {
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+table th,
+table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+ul {
+    list-style: disc;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.form-container {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    max-width: 600px;
+}
+
+.form-container input {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 6px;
+}
+
+.toggleFormBtn {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+form {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+form input,
+form select,
+form button {
+    margin-bottom: 15px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+form input:focus,
+form select:focus {
+    border-color: #4da6ff;
+    box-shadow: 0 0 6px rgba(0, 153, 255, 0.3);
+}
+
+form button {
+    background: #4da6ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+form button:hover {
+    background: #357edd;
+}
+
+p {
+    margin-top: 20px;
+}
+
+p a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#users {
+    margin-top: 40px;
+}
+
+.form-container select {
+    margin-top: 5px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}

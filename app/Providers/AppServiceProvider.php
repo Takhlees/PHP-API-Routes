@@ -23,7 +23,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         RateLimiter::for('global-limit', function (Request $request) {
-        // You can use IP, user ID, or both
         return Limit::perMinute(5)->by(
             optional($request->user())->id ?? $request->ip()
         );

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('roadmaps', function (Blueprint $table) {
             $table->id();
-            $table->string('category');
+            $table->string('category')->index();
             $table->timestamps();
         });
     }

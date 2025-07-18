@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->string('role-type');
-            $table->date('date');
-            $table->dateTime('checkIn', precision: 0);
-            $table->dateTime('checkOut', precision: 0);
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unique(['user_id']);
+            $table->string('role_type')->index();
+            $table->date('date')->index();
+            $table->time('check_in', precision: 0);
+            $table->time('check_out', precision: 0);
+            $table->unsignedBigInteger('user_id')->index();
+            $table->foreign('user_id', 'attendances_user_id_foreign')->references('id')->on('users')->onDelete('cascade');
+            $table->unique(['user_id', 'date']); 
+
             $table->timestamps();
         });
     }

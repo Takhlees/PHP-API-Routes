@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('roadmap_id');
-            $table->foreign('roadmap_id')->references('id')->on('roadmaps')->onDelete('cascade');
-            $table->unique(['roadmap_id']);
+            $table->string('name')->index();
+            $table->unsignedBigInteger('roadmap_id')->index();
+            $table->foreign('roadmap_id', 'roadmap_id_foreign')->references('id')->on('roadmaps')->onDelete('cascade');
+           
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
      public function register(Request $request)
     {
-   $request->validate([
+        $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
@@ -29,6 +29,18 @@ class AuthController extends Controller
             'message' => 'User registered successfully',
             'user'    => $user
         ], 201);
+
+        
+    switch ($user->role) {
+        case 'admin':
+            return redirect('/dashboards/admin');
+        case 'teacher':
+            return redirect('/dashboards/teacher');
+        case 'student':
+            return redirect('/dashboards/student');
+        default:
+            return redirect('/'); 
+    }
     }
 
      public function login(Request $request)
@@ -60,8 +72,20 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Login successful',
             'token' => $token,
-            'user' => $user
+            'user' => $user,
+            'redirect_to' => '/dashboards/' . $user->role
         ]);
+         
+    switch ($user->role) {
+        case 'admin':
+            return redirect('/dashboards/admin');
+        case 'teacher':
+            return redirect('/dashboards/teacher');
+        case 'student':
+            return redirect('/dashboards/student');
+        default:
+            return redirect('/'); // fallback
+    }
     }
 
     public function update(Request $request, $id)

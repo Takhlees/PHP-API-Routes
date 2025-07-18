@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('class_courses', function (Blueprint $table) {
             $table->id();
-             $table->unsignedBigInteger('class_id');
-            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
-            $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+             $table->unsignedBigInteger('class_id')->index();;
+            $table->foreign('class_id', 'class_courses_class_id_foreign')->references('id')->on('classes')->onDelete('cascade');
+            $table->unsignedBigInteger('course_id')->index();;
+            $table->foreign('course_id', 'class_courses_course_id_foreign')->references('id')->on('courses')->onDelete('cascade');
 $table->unique(['class_id', 'course_id']);
             $table->timestamps();
         });
